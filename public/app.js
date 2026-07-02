@@ -107,13 +107,15 @@ async function markReadCurrentHour() {
   const isMsgHour = hour === birthdayObj().hour || realQuotes().some((q) => q.hour === hour);
   if (!isMsgHour) return;
   try {
-    await fetch(`${CFG.supabaseUrl}/rest/v1/${CFG.readsTable}?on_conflict=endpoint,hour`, {
+    // Plain insert; if this hour is already marked for this phone it's a 409,
+    // which we simply ignore (already recorded).
+    await fetch(`${CFG.supabaseUrl}/rest/v1/${CFG.readsTable}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         apikey: CFG.supabaseAnonKey,
         Authorization: `Bearer ${CFG.supabaseAnonKey}`,
-        Prefer: 'resolution=merge-duplicates,return=minimal',
+        Prefer: 'return=minimal',
       },
       body: JSON.stringify({ endpoint: MY_ENDPOINT, hour }),
     });
@@ -205,18 +207,21 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 async function saveSubscription(sub) {
-  const url = `${CFG.supabaseUrl}/rest/v1/${CFG.table}?on_conflict=endpoint`;
+  // Plain insert (no upsert): the subscriber list stays private (no SELECT policy),
+  // and a repeat subscribe just hits the unique endpoint -> 409, which means
+  // "already saved" and is perfectly fine.
+  const url = `${CFG.supabaseUrl}/rest/v1/${CFG.table}`;
   const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       apikey: CFG.supabaseAnonKey,
       Authorization: `Bearer ${CFG.supabaseAnonKey}`,
-      Prefer: 'resolution=merge-duplicates,return=minimal',
+      Prefer: 'return=minimal',
     },
     body: JSON.stringify({ endpoint: sub.endpoint, subscription: sub.toJSON() }),
   });
-  if (!res.ok) throw new Error(`save ${res.status}: ${await res.text()}`);
+  if (!res.ok && res.status !== 409) throw new Error(`save ${res.status}: ${await res.text()}`);
 }
 
 async function enableNotifications() {
