@@ -65,7 +65,7 @@ Add these (values for the VAPID + URL ones are in your local **`.env`** file):
 
 | Secret | Value |
 |---|---|
-| `SUPABASE_URL` | `https://ereapnbfdftvbhyjxxnw.supabase.co` |
+| `SUPABASE_URL` | `https://plvrtfstjymwwjcsbhnd.supabase.co` |
 | `SUPABASE_SERVICE_KEY` | your **service_role** key (from Step 2) |
 | `VAPID_PUBLIC_KEY` | copy from your local **`.env`** (`VAPID_PUBLIC_KEY=…`) |
 | `VAPID_PRIVATE_KEY` | copy from your local **`.env`** (`VAPID_PRIVATE_KEY=…`) — keep secret |

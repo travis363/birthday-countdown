@@ -15,8 +15,8 @@ window.BDAY_CONFIG = {
 
   // Supabase (stores the phone's push subscription). URL is yours already.
   // Paste your project's ANON PUBLIC key below (Supabase -> Settings -> API).
-  supabaseUrl: 'https://ereapnbfdftvbhyjxxnw.supabase.co',
-  supabaseAnonKey: 'PASTE_YOUR_SUPABASE_ANON_PUBLIC_KEY_HERE',
+  supabaseUrl: 'https://plvrtfstjymwwjcsbhnd.supabase.co',
+  supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsdnJ0ZnN0anltd3dqY3NiaG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwMDY4MjQsImV4cCI6MjA5ODU4MjgyNH0.9yV3PVsfpDkkxT6N6bdS1p9DKd21Uq_maqZ-cURPd_Y',
   table: 'birthday_subs',
   readsTable: 'birthday_reads',
 };
