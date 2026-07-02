@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Happy Birthday Baby Girl 🎀</title>
+  <meta name="theme-color" content="#ff6fb5" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- floating flowers / sparkles background -->
+  <div class="garden" aria-hidden="true"></div>
+
+  <main class="stage">
+    <!-- COUNTDOWN VIEW -->
+    <section id="countdown-view" class="card">
+      <div class="crown">🌸👑🌸</div>
+      <h1 class="title">Countdown to<br /><span class="name" id="who">Baby Girl's</span><br /><span class="big">12th Birthday</span></h1>
+
+      <div class="clock" id="clock">
+        <div class="unit"><span class="num" id="days">--</span><span class="lbl">days</span></div>
+        <div class="unit"><span class="num" id="hours">--</span><span class="lbl">hours</span></div>
+        <div class="unit"><span class="num" id="mins">--</span><span class="lbl">mins</span></div>
+        <div class="unit"><span class="num" id="secs">--</span><span class="lbl">secs</span></div>
+      </div>
+
+      <p class="sub" id="target-line">🎂 July 7, 2026 · 9:00 AM 🎂</p>
+
+      <button id="notify-btn" class="btn">🔔 Remind me on my birthday!</button>
+      <p id="notify-status" class="status" role="status"></p>
+    </section>
+
+    <!-- BIRTHDAY VIEW (revealed at zero) -->
+    <section id="party-view" class="card party hidden">
+      <div class="balloons">🎈🎀🎈🎀🎈</div>
+      <h1 class="hbd">Happy Birthday! 🎉</h1>
+      <p class="bday-msg" id="bday-msg"></p>
+
+      <section id="quotes" class="quotes hidden">
+        <h2 class="quotes-h">💌 Notes from Dad 💌</h2>
+        <div id="quote-list"></div>
+        <p id="locked-note" class="locked-note"></p>
+      </section>
+
+      <div class="cake">🎂</div>
+      <button id="celebrate-btn" class="btn">🎉 Celebrate! 🎉</button>
+    </section>
+  </main>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

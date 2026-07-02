@@ -1,0 +1,19 @@
+{
+  "name": "birthday-countdown",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pink birthday countdown PWA + push notification for a very special 12th birthday.",
+  "scripts": {
+    "dev": "node server.mjs",
+    "gen-vapid": "node scripts/gen-vapid.mjs",
+    "make-icons": "node scripts/make-icons.mjs",
+    "send": "node scripts/send-birthday.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
+  }
+}

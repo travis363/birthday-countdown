@@ -1,0 +1,24 @@
+{
+  "_note": "Times are the hour in Mountain time (24h). Birthday alert at 9am, then one quote every hour 10am-10pm.",
+  "quoteTitle": "💖 For the Birthday Girl 💖",
+  "birthday": {
+    "hour": 9,
+    "title": "HAPPY 12th BDAY BABY GIRL!!!!",
+    "body": "HOPE YOU HAVE AN AMAZING DAY 💖 LOVE DAD & KRISTEN"
+  },
+  "quotes": [
+    { "hour": 10, "text": "Twelve years ago, my heart grew in ways I never knew were possible." },
+    { "hour": 11, "text": "Being your dad is my favorite full-time job... even if the pay is mostly hugs and eye rolls." },
+    { "hour": 12, "text": "Don't let anyone tell you what you can't become." },
+    { "hour": 13, "text": "Being your dad has been the greatest adventure of my life." },
+    { "hour": 14, "text": "You are braver than you believe, stronger than you seem, and smarter than you think!" },
+    { "hour": 15, "text": "No matter how old you get, you'll never outgrow being my daughter." },
+    { "hour": 16, "text": "The strongest people are the ones who stay kind." },
+    { "hour": 17, "text": "You're the only person who can make me laugh and roll my eyes at the same time." },
+    { "hour": 18, "text": "You're the reason I have gray hairs... and I wouldn't trade a single one." },
+    { "hour": 19, "text": "I checked the Dad Rulebook. You're still required to laugh at my jokes." },
+    { "hour": 20, "text": "Believe in yourself even on the days it's hard." },
+    { "hour": 21, "text": "If life ever gets hard, remember you've got a dad who will always have your back." },
+    { "hour": 22, "text": "Natalie, from the moment you were born, you changed my life forever. Watching you grow into the amazing young lady you are today has been the greatest privilege I'll ever have. No matter how much time passes, you'll always be my little girl. Happy 12th Birthday. I love you more than words will ever be able to say. Love, Dad" }
+  ]
+}

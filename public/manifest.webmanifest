@@ -1,0 +1,16 @@
+{
+  "name": "Happy Birthday Baby Girl",
+  "short_name": "Birthday",
+  "description": "A countdown to a very special 12th birthday.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffd9ec",
+  "theme_color": "#ff6fb5",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

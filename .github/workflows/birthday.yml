@@ -1,0 +1,52 @@
+# Fires the birthday alert (9 AM) and then an hourly quote (10 AM - 10 PM) on July 7,
+# all in Mountain time. The script picks the right message for the current hour and
+# only sends on July 7 (unless you pass a test_hour below).
+#
+# Cron is in UTC. In July, Mountain = UTC-6 (MDT):
+#   9 AM - 5 PM MT  = 15:00 - 23:00 UTC on July 7
+#   6 PM - 10 PM MT = 00:00 - 04:00 UTC on July 8
+#
+# Required GitHub secrets (repo -> Settings -> Secrets and variables -> Actions):
+#   SUPABASE_URL, SUPABASE_SERVICE_KEY, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT
+name: Birthday push
+
+on:
+  schedule:
+    # First alert, on the hour:
+    - cron: "0 15-23 7 7 *"  # 9 AM - 5 PM MT, July 7
+    - cron: "0 0-4 8 7 *"    # 6 PM - 10 PM MT, July 7 (next UTC day)
+    # Follow-up alert 5 min later (only sent if she hasn't opened it):
+    - cron: "5 15-23 7 7 *"
+    - cron: "5 0-4 8 7 *"
+  workflow_dispatch:
+    inputs:
+      test_hour:
+        description: "Force an hour 9-22 to TEST a specific message (9 = birthday, 10 = first quote). Blank = real schedule."
+        required: false
+        default: ""
+      mode:
+        description: "send = first alert, remind = follow-up-if-unread"
+        required: false
+        default: "send"
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci || npm install
+      - name: Send birthday push
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
+          TEST_HOUR: ${{ github.event.inputs.test_hour }}
+          # cron starting with "0 " = first alert (send); "5 " = follow-up (remind).
+          # Manual runs use the mode input (default send).
+          MODE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.mode || (startsWith(github.event.schedule, '0 ') && 'send' || 'remind') }}
+        run: node scripts/send-birthday.mjs
