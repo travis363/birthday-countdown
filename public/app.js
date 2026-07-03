@@ -194,8 +194,20 @@ async function registerSW() {
   if (!('serviceWorker' in navigator)) throw new Error('no-sw');
   return navigator.serviceWorker.register('sw.js');
 }
-// Register SW early so the fallback notification can work too.
-registerSW().catch(() => {});
+// Register SW early so the fallback notification can work too, then — if this
+// phone is already subscribed — show the "all set" state instead of the button.
+registerSW()
+  .then(() => navigator.serviceWorker.ready)
+  .then((reg) => reg.pushManager.getSubscription())
+  .then((sub) => {
+    if (sub) {
+      MY_ENDPOINT = sub.endpoint;
+      btn.disabled = true;
+      btn.textContent = "🔔 You're all set!";
+      setStatus("You're all set! 🎉 Your birthday surprise is on its way 💖", 'ok');
+    }
+  })
+  .catch(() => {});
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
