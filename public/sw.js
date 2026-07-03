@@ -26,14 +26,18 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  // Open the app itself (works whether hosted at a domain root or a /repo/ subpath).
-  const url = self.registration.scope;
-  event.waitUntil(
-    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
-      for (const c of list) {
-        if ('focus' in c) return c.focus();
+  // Open the app (works at a domain root or a /repo/ subpath).
+  const scope = self.registration.scope;
+  event.waitUntil((async () => {
+    try {
+      const wins = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      // Only focus a window that's actually THIS app; otherwise open a fresh one.
+      for (const c of wins) {
+        if (c.url && c.url.startsWith(scope) && 'focus' in c) {
+          return await c.focus();
+        }
       }
-      if (self.clients.openWindow) return self.clients.openWindow(url);
-    })
-  );
+    } catch (_) { /* fall through to open a new window */ }
+    if (self.clients.openWindow) return self.clients.openWindow(scope);
+  })());
 });
